@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OutgoingCallListActivity" >
+
+    <ListView 
+        android:id="@+id/outgoingCallList"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true" >
+    </ListView>
+    
+    
+    <TextView
+        android:id="@+id/emptyOutgoingCallList"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:text="There is no numbers to block outgoing calls!" >
+    </TextView>
+    
+    <Button
+        android:id="@+id/registerOutgoingNumberButton"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:text="Register New Number" >
+    </Button>
+
+</RelativeLayout>

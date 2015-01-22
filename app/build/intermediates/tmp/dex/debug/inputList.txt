@@ -1,0 +1,2 @@
+C:\Users\Leandro Stanzione\AndroidStudioProjects\PreventCall\app\build\intermediates\classes\debug
+C:\Users\Leandro Stanzione\AndroidStudioProjects\PreventCall\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-7fed85f2a1aa35458e3428ea2fdf7db5d38193a9.jar
