@@ -18,20 +18,22 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int NumberBlockTextId=0x7f08000b;
-        public static final int action_settings=0x7f08000c;
+        public static final int NumberBlockTextId=0x7f08000d;
+        public static final int action_settings=0x7f08000e;
+        public static final int addContactIncomingNumberButton=0x7f080002;
+        public static final int addContactOutgoingNumberButton=0x7f08000b;
         public static final int emptyIncomingCallList=0x7f080001;
-        public static final int emptyOutgoingCallList=0x7f080009;
-        public static final int incomingCallButton=0x7f080004;
+        public static final int emptyOutgoingCallList=0x7f08000a;
+        public static final int incomingCallButton=0x7f080005;
         public static final int incomingCallList=0x7f080000;
-        public static final int newNumberButton=0x7f080007;
-        public static final int newNumberEditText=0x7f080006;
-        public static final int newNumberText=0x7f080005;
-        public static final int new_block_number=0x7f08000d;
-        public static final int outgoingCallButton=0x7f080003;
-        public static final int outgoingCallList=0x7f080008;
-        public static final int registerIncomingNumberButton=0x7f080002;
-        public static final int registerOutgoingNumberButton=0x7f08000a;
+        public static final int newNumberButton=0x7f080008;
+        public static final int newNumberEditText=0x7f080007;
+        public static final int newNumberText=0x7f080006;
+        public static final int new_block_number=0x7f08000f;
+        public static final int outgoingCallButton=0x7f080004;
+        public static final int outgoingCallList=0x7f080009;
+        public static final int registerIncomingNumberButton=0x7f080003;
+        public static final int registerOutgoingNumberButton=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_incoming_call_list=0x7f030000;

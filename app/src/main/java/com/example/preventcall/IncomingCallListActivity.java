@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +26,7 @@ public class IncomingCallListActivity extends Activity {
 	
 	ListView mIncomingCallList;
 	Button mRegisterButton;
+    Button mAddContactButton;
 	ArrayAdapter<String> mAdapter;
 	
 	SharedPreferences prefs;
@@ -38,6 +42,7 @@ public class IncomingCallListActivity extends Activity {
 		mIncomingCallList.setEmptyView(findViewById(R.id.emptyIncomingCallList));
 		
 		mRegisterButton = (Button) findViewById(R.id.registerIncomingNumberButton);
+        mAddContactButton = (Button) findViewById(R.id.addContactIncomingNumberButton);
 		
 		ArrayList<String> numbers = getNumbersFromPrefs();
 		
@@ -55,6 +60,15 @@ public class IncomingCallListActivity extends Activity {
 				
 			}
 		});
+
+        mAddContactButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                addContact();
+
+            }
+        });
 		
 	}
 
@@ -71,6 +85,14 @@ public class IncomingCallListActivity extends Activity {
 		startActivityForResult(newNumberIntent, Configs.CODE_NEW_NUMBER);
 		
 	}
+
+    public void addContact(){
+
+        Intent pickContactIntent = new Intent( Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI );
+        pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        startActivityForResult(pickContactIntent, Configs.CODE_ADD_CONTACT);
+
+    }
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -83,6 +105,36 @@ public class IncomingCallListActivity extends Activity {
 			saveChanges();
 			
 		}
+        else if(requestCode == Configs.CODE_ADD_CONTACT && resultCode == RESULT_OK){
+
+            Uri contactData = data.getData();
+            Cursor c =  managedQuery(contactData, null, null, null, null);
+            if (c.moveToFirst()) {
+                String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                Log.d(TAG, "Name: " + name);
+                String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                Log.d(TAG, "ID: " + id);
+
+                if (Integer.parseInt(c.getString(
+                        c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+                    Cursor pCur = managedQuery(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        // Do something with phones
+                        String number = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Log.d(TAG, number);
+                        mAdapter.add(number);
+
+                        saveChanges();
+                    }
+                    pCur.close();
+                }
+            }
+
+        }
 		
 	}
 	
